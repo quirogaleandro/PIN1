@@ -24,16 +24,19 @@ pipeline {
       }
     }
    stage('Deploy Image') {
-      steps{
-        def nexusUsername = 'admin'  // Usuario de Nexus
-        def nexusPassword = 'master123'  // Contraseña de Nexus
-        sh '''
-        echo $nexusPassword | docker login -u $nexusUsername --password-stdin 127.0.0.1:8083
-        docker tag pin-docker 127.0.0.1:8083/pin-jenkins
-        docker push 127.0.0.1:8083/pin-jenkins
-        '''
-        }
-      }
+      stage('Deploy Image') {
+            steps {
+                script {
+                    def nexusUsername = 'admin' 
+                    def nexusPassword = 'master123'  
+
+                    sh """
+                    echo $nexusPassword | docker login -u $nexusUsername --password-stdin 127.0.0.1:8083
+                    docker tag pin-docker 127.0.0.1:8083/pin-jenkins
+                    docker push 127.0.0.1:8083/pin-jenkins
+                    """
+                }
+            }
    stage('Vulnerability Scan - Docker ') {
         steps {
           sh "docker run  -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity=critical 127.0.0.1:8083/aquasec-trivy:latest"
