@@ -1,0 +1,2 @@
+docker run -dit -p 8080:8080 --name pin-jenkins -v /var/run/docker.sock:/var/run/docker.sock -v jenkins_home:/var/jenkins_home 127.0.0.1:8083/pin-jenkins
+cat /var/jenkins_home/secrets/initialAdminPassword
