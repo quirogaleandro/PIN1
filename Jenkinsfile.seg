@@ -12,7 +12,7 @@ pipeline {
    stage('Building image') {
       steps{
           sh '''
-          docker build -t PIN-docker .
+          docker build -t pin-docker .
              '''  
         }
     }
@@ -20,14 +20,14 @@ pipeline {
   
     stage('Run tests') {
       steps {
-        sh "docker run PIN-docker npm test"
+        sh "docker run pin-docker npm test"
       }
     }
    stage('Deploy Image') {
       steps{
         sh '''
-        docker tag PIN-docker 127.0.0.1:8083/repository/PIN-docker-repository/
-        docker push 127.0.0.1:8083/repository/PIN-docker-repository/  
+        docker tag pin-docker 127.0.0.1:8083/repository/pin-docker-repository/
+        docker push 127.0.0.1:8083/repository/pin-docker-repository/  
         '''
         }
       }
