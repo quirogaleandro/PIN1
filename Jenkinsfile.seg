@@ -24,7 +24,6 @@ pipeline {
       }
     }
    stage('Deploy Image') {
-      stage('Deploy Image') {
             steps {
                 script {
                     def nexusUsername = 'admin' 
@@ -37,6 +36,7 @@ pipeline {
                     """
                 }
             }
+        }
    stage('Vulnerability Scan - Docker ') {
         steps {
           sh "docker run  -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy image --severity=critical 127.0.0.1:8083/aquasec-trivy:latest"
