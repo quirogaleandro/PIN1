@@ -26,6 +26,7 @@ pipeline {
    stage('Deploy Image') {
       steps{
         sh '''
+        echo $NEXUS_PASSWORD | docker login -u $NEXUS_USERNAME --password-stdin 127.0.0.1:8083
         docker tag pin-docker 127.0.0.1:8083/pin-jenkins
         docker push 127.0.0.1:8083/pin-jenkins
         '''
