@@ -26,8 +26,8 @@ pipeline {
    stage('Deploy Image') {
       steps{
         sh '''
-        docker tag pin-docker 127.0.0.1:8083/repository/pin-docker-repository:latest
-        docker push 127.0.0.1:8083/repository/pin-docker-repository/  
+        docker tag pin-docker 127.0.0.1:8083/pin-jenkins
+        docker push 127.0.0.1:8083/pin-jenkins
         '''
         }
       }
