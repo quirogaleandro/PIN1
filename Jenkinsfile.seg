@@ -25,8 +25,10 @@ pipeline {
     }
    stage('Deploy Image') {
       steps{
+        def nexusUsername = 'admin'  // Usuario de Nexus
+        def nexusPassword = 'master123'  // Contraseña de Nexus
         sh '''
-        echo $NEXUS_PASSWORD | docker login -u $NEXUS_USERNAME --password-stdin 127.0.0.1:8083
+        echo $nexusPassword | docker login -u $nexusUsername --password-stdin 127.0.0.1:8083
         docker tag pin-docker 127.0.0.1:8083/pin-jenkins
         docker push 127.0.0.1:8083/pin-jenkins
         '''
